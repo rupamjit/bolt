@@ -1,27 +1,43 @@
-import ProjectForm from '@/components/ProjectForm'
-import Image from 'next/image'
-import React from 'react'
+"use client"
+
+import ProjectForm from "@/components/ProjectForm";
+import { Button } from "@/components/ui/button";
+import { inngest } from "@/inngest/client";
+import Image from "next/image";
+import React from "react";
 
 const Page = () => {
+  const onInvoke = async () => {
+    await inngest.send({ name: "agent/hello" });
+  };
   return (
-    <div className='flex items-center  justify-center w-full px-4 py-8'>
+    <div className="flex items-center  justify-center w-full px-4 py-8">
+      <Button onClick={onInvoke}>Invoke ai Agent</Button>
 
-      <div className='max-w-5xl w-full'>
-        <section className='space-y-8 flex flex-col items-center'>
-          <div className='flex flex-col items-center'>
-            <Image src="/logo3.png" alt="Logo" width={100} height={100} className='hidden md:block invert dark:invert-0 contain-object'/>
+      <div className="max-w-5xl w-full">
+        <section className="space-y-8 flex flex-col items-center">
+          <div className="flex flex-col items-center">
+            <Image
+              src="/logo3.png"
+              alt="Logo"
+              width={100}
+              height={100}
+              className="hidden md:block invert dark:invert-0 contain-object"
+            />
           </div>
-          <h1 className='text-2xl md:text-5xl font-bold text-center'>Build Something With Bolt</h1>
-          <p className='text-lg md:text-xl text-muted-foreground text-center'>
+          <h1 className="text-2xl md:text-5xl font-bold text-center">
+            Build Something With Bolt
+          </h1>
+          <p className="text-lg md:text-xl text-muted-foreground text-center">
             Create apps and websites by chatting with AI
           </p>
-          <div className='max-w-3xl w-full'>
-            <ProjectForm/>
+          <div className="max-w-3xl w-full">
+            <ProjectForm />
           </div>
         </section>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Page
+export default Page;
