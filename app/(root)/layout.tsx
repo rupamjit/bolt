@@ -12,7 +12,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       />
       
       {/* Content */}
-      <main className="relative min-h-screen">
+      <main className="relative">
         <Navbar />
         <div className="w-full mt-20">
           {children}
