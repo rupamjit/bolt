@@ -53,21 +53,21 @@ const ProjectList = () => {
             <Link href={`/projects/${project.id}`} key={project.id}>
           <Card
             key={project.id}
-            className="group hover:shadow-xl transition-all duration-300 border-zinc-800/50 hover:border-emerald-500/50 cursor-pointer bg-zinc-900/30 backdrop-blur-sm overflow-hidden"
+            className="group hover:shadow-xl transition-all duration-300 border-zinc-200 dark:border-zinc-800/50 hover:border-emerald-500 dark:hover:border-emerald-500/50 cursor-pointer bg-white dark:bg-zinc-900/30 backdrop-blur-sm overflow-hidden shadow-sm dark:shadow-none"
           >
             <CardHeader className="pb-3">
               <div className="flex items-start justify-between mb-3">
                 <div className="p-2.5 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
-                  <FolderKanban className="w-5 h-5 text-emerald-500" />
+                  <FolderKanban className="w-5 h-5 text-emerald-600 dark:text-emerald-500" />
                 </div>
-                <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-emerald-500 group-hover:translate-x-1 transition-all" />
+                <ArrowRight className="w-4 h-4 text-zinc-400 dark:text-zinc-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-500 group-hover:translate-x-1 transition-all" />
               </div>
-              <CardTitle className="text-lg text-zinc-100 group-hover:text-emerald-400 transition-colors line-clamp-1">
+              <CardTitle className="text-lg text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors line-clamp-1">
                 {project.name}
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="flex items-center text-sm text-zinc-400">
+              <div className="flex items-center text-sm text-zinc-600 dark:text-zinc-400">
                 <Calendar className="w-3.5 h-3.5 mr-2" />
                 <span>{formatDate(project.createdAt)}</span>
               </div>
@@ -90,20 +90,20 @@ const ProjectList = () => {
             {projects.map((project) => (
               <Link href={`/projects/${project.id}`} key={project.id}>
               <CarouselItem key={project.id} className="pl-4 md:basis-1/2">
-                <Card className="group hover:shadow-xl transition-all duration-300 border-zinc-800/50 hover:border-emerald-500/50 cursor-pointer bg-zinc-900/30 backdrop-blur-sm">
+                <Card className="group hover:shadow-xl transition-all duration-300 border-zinc-200 dark:border-zinc-800/50 hover:border-emerald-500 dark:hover:border-emerald-500/50 cursor-pointer bg-white dark:bg-zinc-900/30 backdrop-blur-sm shadow-sm dark:shadow-none">
                   <CardHeader className="pb-3">
                     <div className="flex items-start justify-between mb-3">
                       <div className="p-2.5 bg-emerald-500/10 rounded-lg group-hover:bg-emerald-500/20 transition-colors">
-                        <FolderKanban className="w-5 h-5 text-emerald-500" />
+                        <FolderKanban className="w-5 h-5 text-emerald-600 dark:text-emerald-500" />
                       </div>
-                      <ArrowRight className="w-4 h-4 text-zinc-500 group-hover:text-emerald-500 group-hover:translate-x-1 transition-all" />
+                      <ArrowRight className="w-4 h-4 text-zinc-400 dark:text-zinc-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-500 group-hover:translate-x-1 transition-all" />
                     </div>
-                    <CardTitle className="text-lg text-zinc-100 group-hover:text-emerald-400 transition-colors line-clamp-1">
+                    <CardTitle className="text-lg text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors line-clamp-1">
                       {project.name}
                     </CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex items-center text-sm text-zinc-400">
+                    <div className="flex items-center text-sm text-zinc-600 dark:text-zinc-400">
                       <Calendar className="w-3.5 h-3.5 mr-2" />
                       <span>{formatDate(project.createdAt)}</span>
                     </div>
@@ -113,8 +113,8 @@ const ProjectList = () => {
               </Link>
             ))}
           </CarouselContent>
-          <CarouselPrevious className="border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-100" />
-          <CarouselNext className="border-zinc-800 bg-zinc-900/50 hover:bg-zinc-800 text-zinc-400 hover:text-zinc-100" />
+          <CarouselPrevious className="border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-sm dark:shadow-none" />
+          <CarouselNext className="border-zinc-300 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-800 text-zinc-700 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 shadow-sm dark:shadow-none" />
         </Carousel>
       </div>
     </div>
