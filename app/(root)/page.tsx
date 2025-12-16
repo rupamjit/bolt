@@ -1,6 +1,7 @@
 "use client"
 
-import ProjectForm from "@/components/ProjectForm";
+import ProjectForm from "@/components/Projects/ProjectForm";
+import ProjectList from "@/components/Projects/ProjectList";
 import { Button } from "@/components/ui/button";
 import { inngest } from "@/inngest/client";
 import Image from "next/image";
@@ -30,6 +31,10 @@ const Page = () => {
           </p>
           <div className="max-w-3xl w-full">
             <ProjectForm />
+          </div>
+
+           <div className="max-w-3xl w-full">
+            <ProjectList />
           </div>
         </section>
       </div>
