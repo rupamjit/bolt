@@ -55,7 +55,7 @@ export const getCurrentUser = async () => {
         success: false,
       };
     }
-    const dbUser = db.user.findUnique({
+    const dbUser = await db.user.findUnique({
       where: {
         clerkId: user.id,
       },

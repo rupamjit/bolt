@@ -4,6 +4,8 @@ import { Sandbox } from "e2b";
 import z from "zod";
 import { lastAssistantTextMessageContent } from "./utils";
 import { PROMPT } from "@/lib/prompt";
+import db from "@/lib/db";
+import { MessageRole, MessageType } from "@prisma/client";
 
 export const codeAgentFunction = inngest.createFunction(
   { id: "code-agent" },
@@ -166,6 +168,36 @@ export const codeAgentFunction = inngest.createFunction(
       const host = sandbox.getHost(3000);
       return `http://${host}`;
     });
+
+    await step.run("save-result",async()=>{
+      if(isError){
+        return await db.message.create({
+          data:{
+            projectId:event.data.projectId,
+            content:"Something Wen Wrong",
+            role:MessageRole.ASSISTANT,
+            type:MessageType.ERROR
+          }
+        })
+      }
+       return await db.message.create({
+        data: {
+          projectId: event.data.projectId,
+          content: result.state.data.summary,
+          role: MessageRole.ASSISTANT,
+          type: MessageType.RESULT,
+          fragments: {
+            create: {
+              sandboxUrl: sandboxUrl,
+              title: "Untitled",
+              files: result.state.data.files,
+            },
+          },
+        },
+      });
+    })
+
+
     return {
       url:sandboxUrl,
       title:"Untitled",
