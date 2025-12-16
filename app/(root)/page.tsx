@@ -20,11 +20,11 @@ const Page = () => {
               alt="Logo"
               width={100}
               height={100}
-              className="hidden md:block invert dark:invert-0 contain-object"
+              className="hidden text-blue md:block contain-object"
             />
           </div>
           <h1 className="text-2xl md:text-5xl font-bold text-center">
-            Build Something With Bolt
+            Build Anything With Bolt
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground text-center">
             Create apps and websites by chatting with AI

@@ -56,7 +56,7 @@ export const getProjectById = async (projectId: string) => {
   const result = await getCurrentUser();
   if (!result.success || !result.user) throw new Error("Unauthorized");
 
-  const project = await db.project.findUnique({
+  const project = await db.project.findFirst({
     where: {
       id: projectId,
       userId: result.user.id,
