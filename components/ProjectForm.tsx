@@ -11,6 +11,7 @@ import z from "zod";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
+import { useCreateProject } from "@/modules/projects/hooks/project";
 
 const formSchema = z.object({
   content: z
@@ -73,7 +74,9 @@ const PROJECT_TEMPLATES = [
 const ProjectForm = () => {
   const [isFocused, setIsFocused] = useState(false);
   const router = useRouter();
-  const isPending = false;
+
+  const { mutateAsync: createProject, isPending } = useCreateProject();
+
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -87,8 +90,17 @@ const ProjectForm = () => {
   };
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      const res = await createProject(values.content);
+      router.push(`/projects/${res.id}`);
+      toast.success("Project created successfully", { position: "top-center" });
+      form.reset();
+    } catch (error) {
+      console.log(error);
+    }
   };
+
+  const isButtonDisabled = isPending || !form.watch("content").trim();
 
   return (
     <div className="space-y-8">
@@ -133,7 +145,14 @@ const ProjectForm = () => {
               </kbd>
               &nbsp; to submit
             </div>
-            <Button className={cn("size-8 rounded-full")} type="submit">
+            <Button
+              className={cn(
+                "size-8 rounded-full",
+                isButtonDisabled && "bg-muted-foreground border"
+              )}
+              disabled={isButtonDisabled}
+              type="submit"
+            >
               {isPending ? (
                 <Loader2Icon className="size-4 animate-spin" />
               ) : (

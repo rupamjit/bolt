@@ -7,12 +7,9 @@ import Image from "next/image";
 import React from "react";
 
 const Page = () => {
-  const onInvoke = async () => {
-    await inngest.send({ name: "agent/hello" });
-  };
+
   return (
     <div className="flex items-center  justify-center w-full px-4 py-8">
-      <Button onClick={onInvoke}>Invoke ai Agent</Button>
 
       <div className="max-w-5xl w-full">
         <section className="space-y-8 flex flex-col items-center">
