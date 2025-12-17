@@ -5,6 +5,7 @@ import { MessageRole, MessageType } from "@prisma/client";
 import { format } from "date-fns";
 import { ChevronRightIcon, Code2Icon } from "lucide-react";
 import Image from "next/image";
+import { MessageResponse } from "../ai-elements/message";
 
 interface Fragment {
   id: string;
@@ -113,7 +114,7 @@ const AssistantMessage = ({
         </span>
       </div>
       <div className="pl-8.5 flex flex-col gap-y-4">
-        <span>{content}</span>
+        <MessageResponse>{content}</MessageResponse>
         {fragment && type === MessageType.RESULT && (
           <FragmentCard
             fragment={fragment}
