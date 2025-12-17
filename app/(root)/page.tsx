@@ -16,7 +16,7 @@ const Page = () => {
         <section className="space-y-8 flex flex-col items-center">
           <div className="flex flex-col items-center">
             <Image
-              src="/logo3.png"
+              src="/logo.svg"
               alt="Logo"
               width={100}
               height={100}

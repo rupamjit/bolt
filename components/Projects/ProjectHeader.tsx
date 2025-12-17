@@ -43,7 +43,7 @@ const ProjectHeader = ({ projectId }: { projectId: string }) => {
             }
           >
             <Image
-              src={"/logo3.png"}
+              src={"/logo.svg"}
               alt="Vibe"
               width={28}
               height={28}

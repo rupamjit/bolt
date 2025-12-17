@@ -10,7 +10,7 @@ const Navbar = () => {
       <div className="max-w-5xl mx-auto w-full flex justify-between items-center">
         <Link href="/" className="flex items-center gap-2 ">
           <Image
-            src="/logo3.png"
+            src="/logo.svg"
             alt="Logo"
             width={40}
             height={40}
