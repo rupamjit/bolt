@@ -11,6 +11,8 @@ import { useCreateMessages } from "@/modules/messages/hooks/message";
 import { toast } from "sonner";
 
 import { useState } from "react";
+import { useStatus } from "@/modules/usage/hooks/usage";
+import { Usage } from "../Usage";
 
 const formSchema = z.object({
   content: z
@@ -23,6 +25,9 @@ const MessageForm = ({ projectId }: { projectId: string }) => {
   const [isFocused, setIsFocused] = useState(false);
 
   const { mutateAsync, isPending, isError } = useCreateMessages(projectId);
+  const {data:usage} = useStatus();
+
+  const showUsage = !!usage
 
   const form = useForm({
     resolver: zodResolver(formSchema),
@@ -46,6 +51,11 @@ const MessageForm = ({ projectId }: { projectId: string }) => {
 
   return (
     <Form {...form}>
+      {
+        showUsage && (
+          <Usage/>
+        )
+      }
       <form
         onSubmit={form.handleSubmit(onSubmit)}
         className={cn(
