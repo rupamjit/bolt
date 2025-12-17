@@ -1,5 +1,5 @@
 import { inngest } from "./client";
-import { gemini, createAgent, createTool, createNetwork } from "@inngest/agent-kit";
+import { gemini, createAgent, createTool, createNetwork, createState } from "@inngest/agent-kit";
 import { Sandbox } from "e2b";
 import z from "zod";
 import { lastAssistantTextMessageContent } from "./utils";
@@ -20,6 +20,42 @@ export const codeAgentFunction = inngest.createFunction(
           timeoutMs: 1000 * 60 * 60,
         });
         return sandbox.sandboxId;
+      }
+    );
+
+    const previousMessages = await step.run(
+      "get-previous-messages",
+      async () => {
+        const formattedMessages = [];
+
+        const messages = await db.message.findMany({
+          where: {
+            projectId: event.data.projectId,
+          },
+          orderBy: {
+            createdAt: "desc",
+          },
+        });
+
+        for (const message of messages) {
+          formattedMessages.push({
+            type: "text",
+            role: message.role === "ASSISTANT" ? "assistant" : "user",
+            content: message.content,
+          });
+        }
+
+        return formattedMessages;
+      }
+    );
+
+    const state = createState(
+      {
+        summary: "",
+        files: {},
+      },
+      {
+        messages: previousMessages,
       }
     );
 
@@ -157,7 +193,7 @@ export const codeAgentFunction = inngest.createFunction(
       },
     });
 
-    const result = await network.run(event.data.value);
+    const result = await network.run(event.data.value,{state});
 
     const fragmentTitleGenerator = createAgent({
       name: "fragment-title-generator",
