@@ -1,12 +1,11 @@
 import { inngest } from "./client";
-import { gemini, createAgent, createTool, createNetwork, createState } from "@inngest/agent-kit";
+import { gemini, createAgent, createTool, createNetwork, createState, TextMessage } from "@inngest/agent-kit";
 import { Sandbox } from "e2b";
 import z from "zod";
 import { lastAssistantTextMessageContent } from "./utils";
 import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from "@/lib/prompt";
 import db from "@/lib/db";
 import { MessageRole, MessageType } from "@prisma/client";
-import { generateText } from "ai"
 
 export const codeAgentFunction = inngest.createFunction(
   { id: "code-agent" },
@@ -26,7 +25,7 @@ export const codeAgentFunction = inngest.createFunction(
     const previousMessages = await step.run(
       "get-previous-messages",
       async () => {
-        const formattedMessages = [];
+        const formattedMessages: TextMessage[]  = [];
 
         const messages = await db.message.findMany({
           where: {
@@ -242,6 +241,8 @@ export const codeAgentFunction = inngest.createFunction(
       const host = sandbox.getHost(3000);
       return `https://${host}`; 
     });
+
+    
 
     await step.run("save-result", async () => {
       if (isError) {
