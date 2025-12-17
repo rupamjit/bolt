@@ -1,17 +1,17 @@
 # This is a config for E2B sandbox template.
-# You can use template ID (ecmq3otre7hpdm13dh4w) or template name (bolt) to create a sandbox:
+# You can use template ID (021j33ydkthxblcy8fq8) or template name (bolt-2) to create a sandbox:
 
 # Python SDK
 # from e2b import Sandbox, AsyncSandbox
-# sandbox = Sandbox.create("bolt") # Sync sandbox
-# sandbox = await AsyncSandbox.create("bolt") # Async sandbox
+# sandbox = Sandbox.create("bolt-2") # Sync sandbox
+# sandbox = await AsyncSandbox.create("bolt-2") # Async sandbox
 
 # JS SDK
 # import { Sandbox } from 'e2b'
-# const sandbox = await Sandbox.create('bolt')
+# const sandbox = await Sandbox.create('bolt-2')
 
 team_id = "720c12c9-342b-4313-bfd5-31ab37bde4aa"
 start_cmd = "/compile_page.sh"
 dockerfile = "e2b.Dockerfile"
-template_name = "bolt"
-template_id = "ecmq3otre7hpdm13dh4w"
+template_name = "bolt-2"
+template_id = "021j33ydkthxblcy8fq8"
